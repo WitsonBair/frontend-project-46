@@ -1,0 +1,25 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "Hexlet Project Level 2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WitsonBair/frontend-project-46.git"
+  },
+  "keywords": [
+    "hexlet-lvl-2-project"
+  ],
+  "author": "WitsonBair",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WitsonBair/frontend-project-46/issues"
+  },
+  "homepage": "https://github.com/WitsonBair/frontend-project-46#readme",
+  "dependencies": {
+    "commander": "^9.4.0"
+  }
+}
