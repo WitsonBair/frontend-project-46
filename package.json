@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Hexlet Project Level 2",
   "main": "index.js",
+  "bin": {
+    "gendiff": "gendiff.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +23,8 @@
   },
   "homepage": "https://github.com/WitsonBair/frontend-project-46#readme",
   "dependencies": {
-    "commander": "^9.4.0"
-  }
+    "commander": "^9.4.0",
+    "lodash": "^4.17.21"
+  },
+  "type": "module"
 }
