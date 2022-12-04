@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
+import parseFile from './src/parsers.js';
 
 const sortKeys = (obj) => {
   const keys = Object.keys(obj);
@@ -20,8 +21,8 @@ const genDiff = (filepath1, filepath2) => {
   const file1 = fs.readFileSync(path.resolve(process.cwd(), filepath1), 'utf-8');
   const file2 = fs.readFileSync(path.resolve(process.cwd(), filepath2), 'utf-8');
 
-  const obj1 = JSON.parse(file1);
-  const obj2 = JSON.parse(file2);
+  const obj1 = parseFile(file1, path.extname(filepath1));
+  const obj2 = parseFile(file2, path.extname(filepath2));
 
   const file1Entries = Object.entries(obj1);
   const file2Entries = Object.entries(obj2);
