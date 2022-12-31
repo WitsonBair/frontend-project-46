@@ -2,7 +2,7 @@ const makeSpace = (depth) => ' '.repeat(depth * 4 - 2);
 
 const stringify = (obj, depth) => {
   const space = makeSpace(depth + 1);
-  const preSpace = `${space}    `;
+  const preSpace = `${space}`;
   
   if (obj instanceof Object) {
     const makeString = Object.entries(obj).map(([key, value]) => `${preSpace}${key}: ${stringify(value, depth + 1)}`);
@@ -13,7 +13,7 @@ const stringify = (obj, depth) => {
 
 const stylish = (tree, depth = 1) => {
   const space = makeSpace(depth);
-  const preSpace = `${space}  `;
+  const preSpace = `${space}`;
 
   const result = tree.map((node) => {
     switch (node.type) {
