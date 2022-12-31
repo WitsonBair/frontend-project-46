@@ -10,3 +10,9 @@
 
 ## YAML
 [![asciicast](https://asciinema.org/a/ODUv43hZGHVNCDiNYVmprHRnX.svg)](https://asciinema.org/a/ODUv43hZGHVNCDiNYVmprHRnX)
+
+## STYLISH
+[![asciicast](https://asciinema.org/a/0rfTuQo4APyje8nmqaref54JG.svg)](https://asciinema.org/a/0rfTuQo4APyje8nmqaref54JG)
+
+## PLAIN
+[![asciicast](https://asciinema.org/a/jZH1aQWUg6l31FatiWAdCoQDC.svg)](https://asciinema.org/a/jZH1aQWUg6l31FatiWAdCoQDC)

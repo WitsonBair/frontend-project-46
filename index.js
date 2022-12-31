@@ -2,9 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import parseFile from './src/parsers.js';
 import makeTree from './src/makeTree.js';
-import chooseFormat from './src/formatters/chooseFormat.js';
+import chooseFormat from './src/formatters/index.js';
 
-const genDiff = (filepath1, filepath2, format = 'stylish') => {
+const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const file1 = fs.readFileSync(path.resolve(process.cwd(), filepath1), 'utf-8');
   const file2 = fs.readFileSync(path.resolve(process.cwd(), filepath2), 'utf-8');
 
@@ -13,7 +13,7 @@ const genDiff = (filepath1, filepath2, format = 'stylish') => {
 
   const tree = makeTree(obj1, obj2);
 
-  const result = chooseFormat(tree, format);
+  const result = chooseFormat(tree, formatName);
 
   return result;
 };
