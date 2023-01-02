@@ -11,6 +11,6 @@ program
   .option('-f, --format <type>', 'output format', 'stylish')
   .action((filepath1, filepath2, formatName) => {
     const diff = genDiff(filepath1, filepath2, formatName);
-    console.dir(diff, { depth: null });
+    console.log(diff);
   })
   .parse();
