@@ -28,10 +28,13 @@ const stylish = (tree) => {
           return `${currentIndent}${obj.name}: ${iter(obj.children, depth + 1)}`;
         case 'same':
           return `${currentIndent}${value}`;
-        case 'different':
+        case 'different': {
           const valueBefore = `${currentCloseIndent}- ${obj.name}: ${iterIfObject(obj.valueMinus)}`;
           const valueAfter = `${currentCloseIndent}+ ${obj.name}: ${iterIfObject(obj.valuePlus)}`;
           return `${valueBefore}\n${valueAfter}`;
+        }
+        default:
+          console.log('Wrong type');
       }
       const keys = Object.keys(obj);
       const nestedObj = keys.map((key) => `${currentIndent}${key}: ${iterIfObject(obj[key])}`);

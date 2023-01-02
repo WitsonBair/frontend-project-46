@@ -1,17 +1,15 @@
 import genDiff from '../index.js';
 
-const expected =
-`
+const expected = `
     - follow: false
       host: hexlet.io
     - proxy: 123.234.53.22
     - timeout: 50
     + timeout: 20
     + verbose: true
-`
+`;
 
-const expected2 =
-`
+const expected2 = `
       common: {
         + follow: false
           setting1: Value 1
@@ -56,8 +54,7 @@ const expected2 =
       }
 `;
 
-const expected3 =
-`Property 'common.follow' was added with value: false
+const expected3 = `Property 'common.follow' was added with value: false
 Property 'common.setting2' was removed
 Property 'common.setting3' was updated. From true to null
 Property 'common.setting4' was added with value: 'blah blah'
@@ -67,10 +64,9 @@ Property 'common.setting6.ops' was added with value: 'vops'
 Property 'group1.baz' was updated. From 'bas' to 'bars'
 Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
-Property 'group3' was added with value: [complex value]`
+Property 'group3' was added with value: [complex value]`;
 
-const expected4 =
-`[
+const expected4 = `[
   {
     "name": "common",
     "type": "object",
@@ -185,7 +181,7 @@ const expected4 =
       "fee": 100500
     }
   }
-]`
+]`;
 
 test('general differencies', () => {
   const flat = genDiff('__fixtures__/file1.json', '__fixtures__/file2.json');
