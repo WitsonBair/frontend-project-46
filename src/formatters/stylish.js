@@ -19,22 +19,14 @@ const stylish = (tree) => {
 
     const result = node.map((obj) => {
       const value = `${obj.name}: ${iterIfObject(obj.value)}`;
-      switch (obj.type) {
-        case 'plus':
-          return `${currentCloseIndent}+ ${value}`;
-        case 'minus':
-          return `${currentCloseIndent}- ${value}`;
-        case 'object':
-          return `${currentIndent}${obj.name}: ${iter(obj.children, depth + 1)}`;
-        case 'same':
-          return `${currentIndent}${value}`;
-        case 'different': {
-          const valueBefore = `${currentCloseIndent}- ${obj.name}: ${iterIfObject(obj.valueMinus)}`;
-          const valueAfter = `${currentCloseIndent}+ ${obj.name}: ${iterIfObject(obj.valuePlus)}`;
-          return `${valueBefore}\n${valueAfter}`;
-        }
-        default:
-          console.log('Wrong type');
+      if (obj.type === 'plus') return `${currentCloseIndent}+ ${value}`;
+      if (obj.type === 'minus') return `${currentCloseIndent}- ${value}`;
+      if (obj.type === 'object') return `${currentIndent}${obj.name}: ${iter(obj.children, depth + 1)}`;
+      if (obj.type === 'same') return `${currentIndent}${value}`;
+      if (obj.type === 'different') {
+        const valueBefore = `${currentCloseIndent}- ${obj.name}: ${iterIfObject(obj.valueMinus)}`;
+        const valueAfter = `${currentCloseIndent}+ ${obj.name}: ${iterIfObject(obj.valuePlus)}`;
+        return `${valueBefore}\n${valueAfter}`;
       }
       const keys = Object.keys(obj);
       const nestedObj = keys.map((key) => `${currentIndent}${key}: ${iterIfObject(obj[key])}`);
