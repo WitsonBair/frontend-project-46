@@ -39,10 +39,10 @@ const stylish = (tree, depth = 1) => {
 
 export default (tree) => {
   const step1 = stylish(tree).split('');
-  step1[0] = '';
-  step1[1] = '';
-  step1[step1.length - 1] = '';
-  step1[step1.length - 2] = '';
+  /* eslint-disable no-sequences */
+  step1[0, 1] = '';
+  step1[step1.length - 1, step1.length - 2] = '';
+  /* eslint-disable no-sequences */
 
   const step2 = step1.join('').split('');
   step2[0] = '{\n';
