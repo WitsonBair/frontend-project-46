@@ -37,16 +37,4 @@ const stylish = (tree, depth = 1) => {
   return `\n${result.flatMap((str) => str).join('\n')}\n`;
 };
 
-export default (tree) => {
-  const step1 = stylish(tree).split('');
-  /* eslint-disable no-sequences */
-  step1[0, 1] = '';
-  step1[step1.length - 1, step1.length - 2] = '';
-  /* eslint-disable no-sequences */
-
-  const step2 = step1.join('').split('');
-  step2[0] = '{\n';
-  step2[step2.length - 1] = '\n}';
-
-  return step2.join('');
-};
+export default (tree) => `{\n${stylish(tree).slice(2, -2)}\n}`;
