@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/WitsonBair/frontend-project-46#readme",
   "dependencies": {
-    "commander": "^9.4.0",
+    "commander": "^9.5.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   },
