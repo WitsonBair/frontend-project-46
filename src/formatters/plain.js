@@ -23,7 +23,7 @@ const plain = (tree, keyName = '') => {
       case 'different':
         return `Property '${property}' was updated. From ${stringify(node.valueMinus)} to ${stringify(node.valuePlus)}`;
       default:
-        throw new Error('Wrong type');
+        return plain(node.value);
     }
   });
   return result.flatMap((str) => str).join('\n');

@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import parseFile from './src/parsers.js';
-import makeTree from './src/makeTree.js';
-import chooseFormat from './src/formatters/index.js';
+import parseFile from './parsers.js';
+import makeTree from './makeTree.js';
+import chooseFormat from './formatters/index.js';
 
 const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const file1 = fs.readFileSync(path.resolve(process.cwd(), filepath1), 'utf-8');

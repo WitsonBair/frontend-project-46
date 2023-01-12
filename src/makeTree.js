@@ -47,4 +47,4 @@ const makeTree = (obj1, obj2) => {
   return result;
 };
 
-export default makeTree;
+export default (obj1, obj2) => [{ type: 'root', value: makeTree(obj1, obj2) }];

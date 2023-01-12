@@ -1,47 +1,52 @@
-import _ from 'lodash';
+const makeSpace = (depth) => ' '.repeat((depth * 4) - 4);
 
-const stylish = (tree) => {
-  const space = ' ';
-  const spaceSize = 4;
+const stringify = (obj, depth) => {
+  const space = makeSpace(depth + 1);
+  const preSpace = `${space}    `;
 
-  const iter = (node, depth) => {
-    const indent = depth * spaceSize;
-    const closeIndent = depth * spaceSize - 2;
-    const currentIndent = space.repeat(indent);
-    const currentCloseIndent = space.repeat(closeIndent);
-    const bracketIndent = space.repeat(indent - spaceSize);
-    const iterIfObject = (value) => {
-      if (_.isObject(value)) {
-        return iter([value], depth + 1);
-      }
-      return value;
-    };
-
-    const result = node.map((obj) => {
-      const value = `${obj.name}: ${iterIfObject(obj.value)}`;
-      if (obj.type === 'plus') return `${currentCloseIndent}+ ${value}`;
-      if (obj.type === 'minus') return `${currentCloseIndent}- ${value}`;
-      if (obj.type === 'object') return `${currentIndent}${obj.name}: ${iter(obj.children, depth + 1)}`;
-      if (obj.type === 'same') return `${currentIndent}${value}`;
-      if (obj.type === 'different') {
-        const valueBefore = `${currentCloseIndent}- ${obj.name}: ${iterIfObject(obj.valueMinus)}`;
-        const valueAfter = `${currentCloseIndent}+ ${obj.name}: ${iterIfObject(obj.valuePlus)}`;
-        return `${valueBefore}\n${valueAfter}`;
-      }
-      const keys = Object.keys(obj);
-      const nestedObj = keys.map((key) => `${currentIndent}${key}: ${iterIfObject(obj[key])}`);
-
-      return nestedObj.join('\n');
-    });
-
-    return [
-      '{',
-      ...result,
-      `${bracketIndent}}`,
-    ].join('\n');
-  };
-
-  return iter(tree, 1);
+  if (obj instanceof Object) {
+    const objectsToString = Object.entries(obj)
+      .map(([key, value]) => `${preSpace}${key}: ${stringify(value, depth + 1)}`);
+    return `{\n${objectsToString.join('\n')}\n${space}}`;
+  }
+  return obj;
 };
 
-export default stylish;
+const stylish = (tree, depth = 1) => {
+  const space = makeSpace(depth);
+  const preSpace = `${space}  `;
+
+  const result = tree.map((node) => {
+    switch (node.type) {
+      case 'plus':
+        return `${preSpace}+ ${node.name}: ${stringify(node.value, depth)}`;
+      case 'minus':
+        return `${preSpace}- ${node.name}: ${stringify(node.value, depth)}`;
+      case 'same':
+        return `${preSpace}  ${node.name}: ${stringify(node.value, depth)}`;
+      case 'different':
+        return [`${preSpace}- ${node.name}: ${stringify(node.valueMinus, depth)}`,
+          `${preSpace}+ ${node.name}: ${stringify(node.valuePlus, depth)}`];
+      case 'object':
+        return `${preSpace}  ${node.name}: {${stylish(node.children, depth + 1)}${makeSpace(depth + 1)}}`;
+      default:
+        return stylish(node.value);
+    }
+  });
+
+  return `\n${result.flatMap((str) => str).join('\n')}\n`;
+};
+
+export default (tree) => {
+  const step1 = stylish(tree).split('');
+  step1[0] = '';
+  step1[1] = '';
+  step1[step1.length - 1] = '';
+  step1[step1.length - 2] = '';
+
+  const step2 = step1.join('').split('');
+  step2[0] = '{\n';
+  step2[step2.length - 1] = '\n}';
+
+  return step2.join('');
+};
