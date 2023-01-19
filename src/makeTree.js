@@ -3,8 +3,7 @@ import _ from 'lodash';
 const makeTree = (obj1, obj2) => {
   const keys = Object.keys(obj1).concat(Object.keys(obj2));
   const united = _.sortBy([...new Set(keys)]);
-  /* eslint-disable no-return-assign */
-  const result = united.map((key) => {
+  return united.map((key) => {
     if (!Object.hasOwn(obj1, key)) {
       return {
         name: key,
@@ -43,8 +42,6 @@ const makeTree = (obj1, obj2) => {
       value: obj1[key],
     };
   });
-  /* eslint-enable no-return-assign */
-  return result;
 };
 
-export default (obj1, obj2) => [{ type: 'root', value: makeTree(obj1, obj2) }];
+export default (obj1, obj2) => ({ type: 'root', value: makeTree(obj1, obj2) });

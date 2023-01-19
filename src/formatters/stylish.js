@@ -12,29 +12,32 @@ const stringify = (obj, depth) => {
   return obj;
 };
 
-const stylish = (tree, depth = 1) => {
+/* eslint-disable no-use-before-define */
+const mapNode = (node, depth) => {
+  const result = node.map((el) => stylish(el, depth));
+  return `\n${result.flatMap((str) => str).join('\n')}\n`;
+};
+/* eslint-enable no-use-before-define */
+
+const stylish = (node, depth = 1) => {
   const space = makeSpace(depth);
   const preSpace = `${space}  `;
 
-  const result = tree.map((node) => {
-    switch (node.type) {
-      case 'plus':
-        return `${preSpace}+ ${node.name}: ${stringify(node.value, depth)}`;
-      case 'minus':
-        return `${preSpace}- ${node.name}: ${stringify(node.value, depth)}`;
-      case 'same':
-        return `${preSpace}  ${node.name}: ${stringify(node.value, depth)}`;
-      case 'different':
-        return [`${preSpace}- ${node.name}: ${stringify(node.valueMinus, depth)}`,
-          `${preSpace}+ ${node.name}: ${stringify(node.valuePlus, depth)}`];
-      case 'object':
-        return `${preSpace}  ${node.name}: {${stylish(node.children, depth + 1)}${makeSpace(depth + 1)}}`;
-      default:
-        return stylish(node.value);
-    }
-  });
-
-  return `\n${result.flatMap((str) => str).join('\n')}\n`;
+  switch (node.type) {
+    case 'plus':
+      return `${preSpace}+ ${node.name}: ${stringify(node.value, depth)}`;
+    case 'minus':
+      return `${preSpace}- ${node.name}: ${stringify(node.value, depth)}`;
+    case 'same':
+      return `${preSpace}  ${node.name}: ${stringify(node.value, depth)}`;
+    case 'different':
+      return [`${preSpace}- ${node.name}: ${stringify(node.valueMinus, depth)}`,
+        `${preSpace}+ ${node.name}: ${stringify(node.valuePlus, depth)}`];
+    case 'object':
+      return `${preSpace}  ${node.name}: {${mapNode(node.children, depth + 1)}${makeSpace(depth + 1)}}`;
+    default:
+      return `{\n${mapNode(node.value).slice(1, -1)}\n}`;
+  }
 };
 
-export default (tree) => `{\n${stylish(tree).slice(2, -2)}\n}`;
+export default stylish;

@@ -6,16 +6,16 @@
 
 ### Пример работы программы:
 ## FLAT JSON
-[![asciicast](https://asciinema.org/a/OYEFqlWdp4O6BeCM1VCUagTIU.svg)](https://asciinema.org/a/OYEFqlWdp4O6BeCM1VCUagTIU)
+[![asciicast](https://asciinema.org/a/yDkvuznhxsl3rYtT6JKZNFUHs.svg)](https://asciinema.org/a/yDkvuznhxsl3rYtT6JKZNFUHs)
 
 ## FLAT YAML
-[![asciicast](https://asciinema.org/a/8PUKHHypXQ6tZFmOXGOC9gXGG.svg)](https://asciinema.org/a/8PUKHHypXQ6tZFmOXGOC9gXGG)
+[![asciicast](https://asciinema.org/a/Mw8MXuWh10pF1sgyvbWpjAJO5.svg)](https://asciinema.org/a/Mw8MXuWh10pF1sgyvbWpjAJO5)
 
 ## STYLISH
-[![asciicast](https://asciinema.org/a/0rfTuQo4APyje8nmqaref54JG.svg)](https://asciinema.org/a/0rfTuQo4APyje8nmqaref54JG)
+[![asciicast](https://asciinema.org/a/DrYavGfzbJzn9GxAQYKukCYqk.svg)](https://asciinema.org/a/DrYavGfzbJzn9GxAQYKukCYqk)
 
 ## PLAIN
-[![asciicast](https://asciinema.org/a/jZH1aQWUg6l31FatiWAdCoQDC.svg)](https://asciinema.org/a/jZH1aQWUg6l31FatiWAdCoQDC)
+[![asciicast](https://asciinema.org/a/RYuEqVcLjmGYezswHNw71YTWj.svg)](https://asciinema.org/a/RYuEqVcLjmGYezswHNw71YTWj)
 
 ## JSON
-[![asciicast](https://asciinema.org/a/fxskvuyq4PjfuQSgu2owfsHd0.svg)](https://asciinema.org/a/fxskvuyq4PjfuQSgu2owfsHd0)
+[![asciicast](https://asciinema.org/a/iY7WZQteR2kkb6ywORzMDQFNo.svg)](https://asciinema.org/a/iY7WZQteR2kkb6ywORzMDQFNo)
