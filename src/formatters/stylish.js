@@ -13,8 +13,8 @@ const stringify = (obj, depth) => {
 };
 
 const stylish = (node, depth = 1) => {
-  const mapNode = (node, depth) => {
-    const result = node.map((el) => stylish(el, depth));
+  const mapNode = (knot, depthLvl) => {
+    const result = knot.map((el) => stylish(el, depthLvl));
     return `\n${result.flatMap((str) => str).join('\n')}\n`;
   };
 
@@ -36,7 +36,7 @@ const stylish = (node, depth = 1) => {
     case 'root':
       return `{\n${mapNode(node.value).slice(1, -1)}\n}`;
     default:
-      throw new Error("Wrong type");
+      throw new Error('Wrong type');
   }
 };
 

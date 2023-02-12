@@ -1,6 +1,6 @@
-import genDiff from '../src/index.js';
 import fs from 'fs';
 import path from 'path';
+import genDiff from '../src/index.js';
 
 const flat = fs.readFileSync(path.resolve(process.cwd(), '../frontend-project-46/__tests__/__fixtures__/answers/flat.txt'), 'utf-8');
 const nested = fs.readFileSync(path.resolve(process.cwd(), '../frontend-project-46/__tests__/__fixtures__/answers/nested.txt'), 'utf-8');

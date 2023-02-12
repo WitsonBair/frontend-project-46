@@ -8,11 +8,11 @@ const stringify = (value) => {
 };
 
 const plain = (node, keyName = '') => {
-  const mapNode = (node, keyName) => node
-    .filter((el) => el.type != 'same')
-    .flatMap((el) => plain(el, keyName)).join('\n');
-
   const property = keyName + node.name;
+
+  const mapNode = (knot, key) => knot
+    .filter((el) => el.type !== 'same')
+    .flatMap((el) => plain(el, key)).join('\n');
 
   switch (node.type) {
     case 'plus':
@@ -28,7 +28,7 @@ const plain = (node, keyName = '') => {
     case 'root':
       return mapNode(node.value);
     default:
-      throw new Error("Wrong type!");
+      throw new Error('Wrong type!');
   }
 };
 
