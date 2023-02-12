@@ -7,12 +7,13 @@ const stringify = (value) => {
   return _.isString(value) ? `'${value}'` : value;
 };
 
-/* eslint-disable no-use-before-define */
-const mapNode = (node, keyName) => node.flatMap((el) => plain(el, keyName)).join('\n');
-/* eslint-enable no-use-before-define */
-
 const plain = (node, keyName = '') => {
+  const mapNode = (node, keyName) => node
+    .filter((el) => el.type != 'same')
+    .flatMap((el) => plain(el, keyName)).join('\n');
+
   const property = keyName + node.name;
+
   switch (node.type) {
     case 'plus':
       return `Property '${property}' was added with value: ${stringify(node.value)}`;
@@ -24,8 +25,10 @@ const plain = (node, keyName = '') => {
       return [];
     case 'different':
       return `Property '${property}' was updated. From ${stringify(node.valueMinus)} to ${stringify(node.valuePlus)}`;
-    default:
+    case 'root':
       return mapNode(node.value);
+    default:
+      throw new Error("Wrong type!");
   }
 };
 

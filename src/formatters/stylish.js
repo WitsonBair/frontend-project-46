@@ -12,14 +12,12 @@ const stringify = (obj, depth) => {
   return obj;
 };
 
-/* eslint-disable no-use-before-define */
-const mapNode = (node, depth) => {
-  const result = node.map((el) => stylish(el, depth));
-  return `\n${result.flatMap((str) => str).join('\n')}\n`;
-};
-/* eslint-enable no-use-before-define */
-
 const stylish = (node, depth = 1) => {
+  const mapNode = (node, depth) => {
+    const result = node.map((el) => stylish(el, depth));
+    return `\n${result.flatMap((str) => str).join('\n')}\n`;
+  };
+
   const space = makeSpace(depth);
   const preSpace = `${space}  `;
 
@@ -35,8 +33,10 @@ const stylish = (node, depth = 1) => {
         `${preSpace}+ ${node.name}: ${stringify(node.valuePlus, depth)}`];
     case 'object':
       return `${preSpace}  ${node.name}: {${mapNode(node.children, depth + 1)}${makeSpace(depth + 1)}}`;
-    default:
+    case 'root':
       return `{\n${mapNode(node.value).slice(1, -1)}\n}`;
+    default:
+      throw new Error("Wrong type");
   }
 };
 

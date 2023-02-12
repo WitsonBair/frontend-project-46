@@ -1,8 +1,11 @@
 import genDiff from '../src/index.js';
-import flat from '../answers/flat.js';
-import nested from '../answers/nested.js';
-import plain from '../answers/plain.js';
-import json from '../answers/json.js';
+import fs from 'fs';
+import path from 'path';
+
+const flat = fs.readFileSync(path.resolve(process.cwd(), '../frontend-project-46/__tests__/__fixtures__/answers/flat.txt'), 'utf-8');
+const nested = fs.readFileSync(path.resolve(process.cwd(), '../frontend-project-46/__tests__/__fixtures__/answers/nested.txt'), 'utf-8');
+const plain = fs.readFileSync(path.resolve(process.cwd(), '../frontend-project-46/__tests__/__fixtures__/answers/plain.txt'), 'utf-8');
+const json = fs.readFileSync(path.resolve(process.cwd(), '../frontend-project-46/__tests__/__fixtures__/answers/json.txt'), 'utf-8');
 
 describe('Find differencies', () => {
   test.each([
