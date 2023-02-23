@@ -13,11 +13,6 @@ const stringify = (obj, depth) => {
 };
 
 const stylish = (node, depth = 1) => {
-  const mapNode = (knot, depthLvl) => {
-    const result = knot.map((el) => stylish(el, depthLvl));
-    return `\n${result.flatMap((str) => str).join('\n')}\n`;
-  };
-
   const space = makeSpace(depth);
   const preSpace = `${space}  `;
 
@@ -32,9 +27,12 @@ const stylish = (node, depth = 1) => {
       return [`${preSpace}- ${node.name}: ${stringify(node.valueMinus, depth)}`,
         `${preSpace}+ ${node.name}: ${stringify(node.valuePlus, depth)}`];
     case 'object':
-      return `${preSpace}  ${node.name}: {${mapNode(node.children, depth + 1)}${makeSpace(depth + 1)}}`;
+      return `${preSpace}  ${node.name}: {\n${node.children
+        .map((el) => stylish(el, depth + 1))
+        .flatMap((str) => str)
+        .join('\n')}\n${makeSpace(depth + 1)}}`;
     case 'root':
-      return `{\n${mapNode(node.value).slice(1, -1)}\n}`;
+      return `{\n${node.value.map((el) => stylish(el, depth)).flatMap((str) => str).join('\n')}\n}`;
     default:
       throw new Error('Wrong type');
   }
