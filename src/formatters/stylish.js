@@ -22,7 +22,7 @@ const stylish = (node, depth = 1) => {
     case 'minus':
       return `${preSpace}- ${node.name}: ${stringify(node.value, depth)}`;
     case 'same':
-      return `${preSpace}  ${node.name}: ${stringify(node.value, depth)}`;
+      return `${preSpace}  ${node.name}: ${node.value}`;
     case 'different':
       return [`${preSpace}- ${node.name}: ${stringify(node.valueMinus, depth)}`,
         `${preSpace}+ ${node.name}: ${stringify(node.valuePlus, depth)}`];
