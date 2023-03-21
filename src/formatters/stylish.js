@@ -1,12 +1,11 @@
 const makeSpace = (depth) => ' '.repeat((depth * 4) - 4);
 
-const stringify = (obj, depth) => {
+const stringify = (obj, depth, stylishFn) => {
   const space = makeSpace(depth + 1);
-  const preSpace = `${space}    `;
 
   if (obj instanceof Object) {
     const objectsToString = Object.entries(obj)
-      .map(([key, value]) => `${preSpace}${key}: ${stringify(value, depth + 1)}`);
+      .map(([key, value]) => stylishFn({ type: 'same', value, name: key }, depth + 1));
     return `{\n${objectsToString.join('\n')}\n${space}}`;
   }
   return obj;
@@ -18,14 +17,14 @@ const stylish = (node, depth = 1) => {
 
   switch (node.type) {
     case 'plus':
-      return `${preSpace}+ ${node.name}: ${stringify(node.value, depth)}`;
+      return `${preSpace}+ ${node.name}: ${stringify(node.value, depth, stylish)}`;
     case 'minus':
-      return `${preSpace}- ${node.name}: ${stringify(node.value, depth)}`;
+      return `${preSpace}- ${node.name}: ${stringify(node.value, depth, stylish)}`;
     case 'same':
-      return `${preSpace}  ${node.name}: ${node.value}`;
+      return `${preSpace}  ${node.name}: ${stringify(node.value, depth, stylish)}`;
     case 'different':
-      return [`${preSpace}- ${node.name}: ${stringify(node.valueMinus, depth)}`,
-        `${preSpace}+ ${node.name}: ${stringify(node.valuePlus, depth)}`];
+      return [`${preSpace}- ${node.name}: ${stringify(node.valueMinus, depth, stylish)}`,
+        `${preSpace}+ ${node.name}: ${stringify(node.valuePlus, depth, stylish)}`];
     case 'object':
       return `${preSpace}  ${node.name}: {\n${node.children
         .map((el) => stylish(el, depth + 1))
