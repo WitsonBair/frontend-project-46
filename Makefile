@@ -1,8 +1,17 @@
-gendiff-help:
-	node gendiff.js -h
+install:
+	npm ci
+
+test:
+	npm test
+
+test-coverage:
+	npm test -- --coverage --coverageProvider=v8
+
 lint:
-	npx eslint .
-lintfix:
+	npx eslint .	
+
+fix:
 	npx eslint . --fix
-jest:
-	NODE_OPTIONS=--experimental-vm-modules npx jest
+
+publish:
+	npm publish --dry-run
