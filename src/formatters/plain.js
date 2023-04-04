@@ -10,9 +10,7 @@ const stringify = (value) => {
 const plain = (node, keyName = '') => {
   const property = keyName + node.name;
 
-  const mapNode = (knot, key) => knot
-    .filter((el) => el.type !== 'same')
-    .flatMap((el) => plain(el, key)).join('\n');
+  const mapNode = (knot, key) => knot.flatMap((el) => plain(el, key)).join('\n');
 
   switch (node.type) {
     case 'plus':
