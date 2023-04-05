@@ -1,11 +1,11 @@
 import yaml from 'js-yaml';
 
-const parser = (file, extansion) => {
-  if (extansion === '.json') {
-    return JSON.parse(file);
+const parser = (data, type) => {
+  if (type === 'json') {
+    return JSON.parse(data);
   }
-  if (extansion === '.yaml' || extansion === '.yml') {
-    return yaml.load(file);
+  if (type === 'yaml' || type === 'yml') {
+    return yaml.load(data);
   }
   return {};
 };
